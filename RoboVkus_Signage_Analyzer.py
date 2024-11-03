@@ -7,7 +7,7 @@ import io
 model_name = "llava-hf/llava-onevision-qwen2-0.5b-ov-hf"
 processor = AutoProcessor.from_pretrained(model_name)
 model = AutoModelForVision2Seq.from_pretrained(model_name).to("cpu")
-model.config.pad_token_id = model.config.eos_token_id  # Устанавливаем pad_token_id
+model.config.pad_token_id = model.config.eos_token_id 
 
 # Промпт для определения типа кухни
 prompt = """
@@ -34,7 +34,7 @@ def get_cuisine_type(image, prompt):
             eos_token_id=model.config.eos_token_id
         )
 
-        # Декодируем вывод модели
+        
         cuisine_description = processor.batch_decode(outputs, skip_special_tokens=True)
 
         return cuisine_description[0] if cuisine_description else "Не удалось определить кухню."
